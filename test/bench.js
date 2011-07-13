@@ -20,7 +20,6 @@ function logicb(){
 		console.log("logic b get connection:", connect.connection_index);
 		var carry = carrier.carry(connect);
 		carry.on('line', function doline(line){
-		    carry.removeListener('line', doline);
 		    console.log("in logic b:", line);
 		    pool.release(carry.reader);	    
 		    pool.status();
@@ -40,7 +39,6 @@ function logica(){
 		console.log("logic a get connection:", connect.connection_index);
 		var carry = carrier.carry(connect);
 		carry.on('line', function doline(line){
-		    carry.removeListener('line', doline);
 		    console.log("in logic a : ", line);
 		    pool.release(carry.reader);
 		    pool.status();
