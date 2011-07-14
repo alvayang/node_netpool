@@ -39,9 +39,9 @@ function logica(){
 		console.log("logic a get connection:", connect.connection_index);
 		var carry = carrier.carry(connect);
 		carry.on('line', function doline(line){
-		    console.log("in logic a : ", line);
 		    pool.release(carry.reader);
 		    pool.status();
+		    console.log("in logic a : ", line);
 		});
 		connect.write("aaaa\n");
 	    }, true);
@@ -62,5 +62,6 @@ function main(){
 }
 var config = {port : 22222, host : '127.0.0.1', minsize : 1, maxsize : 2, callback : main};
 var pool = poolmodule.pool(config);
+pool.init();
 
 //main();
