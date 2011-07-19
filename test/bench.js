@@ -14,10 +14,10 @@ var poolmodule = require('../lib/pool');
 
 function logicb(){
     var  i = 0;
-    while( i < 10 ){
+    while(i < 1000){
 	(function(){
 	    pool.get_connection(function(connect){
-		console.log("logic b get connection:", connect.connection_index);
+		console.log("logic b get connection:", connect.connection_index, i);
 		var carry = carrier.carry(connect);
 		carry.on('line', function doline(line){
 		    console.log("in logic b:", line);
@@ -33,7 +33,7 @@ function logicb(){
 
 function logica(){
     var  i = 0;
-    while( i < 10 ){
+    while(i < 1000){
 	(function(){
 	    pool.get_connection(function(connect){
 		console.log("logic a get connection:", connect.connection_index);
