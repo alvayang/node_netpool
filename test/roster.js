@@ -12,9 +12,12 @@ var carrier = require('./carrier');
 
 (function(){
     var server = net.createServer(function(socket) {
+	socket.on('connect', function(){
+	    console.log('connect\n');
+	});
 	carrier.carry(socket, function(line){
 	    console.log('line:' + line);
-	    return socket.write(line + '\n');
+	    return socket.write("[Server Send]:" + line + '\n');
 	});
     });
     server.listen(22222, function(){

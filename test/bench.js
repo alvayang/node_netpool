@@ -33,7 +33,7 @@ function logicb(){
 
 function logica(){
     var  i = 0;
-    while(i < 1000){
+    while(i < 100000){
 	(function(){
 	    pool.get_connection(function(connect){
 		console.log("logic a get connection:", connect.connection_index);
@@ -56,9 +56,9 @@ function main(){
     process.nextTick(function(){
 	logica();
     });
-    process.nextTick(function(){
-	logicb();
-    });
+    // process.nextTick(function(){
+    // 	logicb();
+    // });
 }
 var config = {port : 22222, host : '127.0.0.1', minsize : 1, maxsize : 2, callback : main};
 var pool = poolmodule.pool(config);
