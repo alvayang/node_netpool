@@ -1,0 +1,14 @@
+{
+  "name": "node_netpool",
+  "description": "A Connection pool for TCP",
+  "keywords" : [ "net", "pool", "tcp", "middleware" ],
+  "version": "v0.1",
+  "author": "Song Yang <netyang@gmail.com>",
+  "main": "./libs/pool.js",
+  "dependencies": {},
+  "engines": { "node": ">= 0.4.6" },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:alvayang/node_netpool.git"
+  }
+}
