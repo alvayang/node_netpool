@@ -32,38 +32,56 @@ function logicb(){
 }
 
 function logica(){
-	var timer = function(){
-    var  i = 0;
-    while(i < 10000){
-	console.log('now:', i);
+    var timer = function(){
+	var  i = 0;
+	while(i < 10){
+	    console.log('now:', i);
 
-	process.nextTick(function(){
+	    process.nextTick(function(){
 		//console.log('running');
-	    pool.get_connection(function(connect){
-		//console.log("logic a get connection:", connect.connection_index);
-		connect.on('data', function(line){
-		});
-		/*
-		var carry = carrier.carry(connect);
-		carry.on('line', function doline(line){
-		    pool.release(carry.reader);
-		    pool.status();
-		    console.log("in logic a : ", line);
-		});
-		*/
-		try{
+		pool.get_connection(function(connect){
+		    //console.log("logic a get connection:", connect.connection_index);
+		    connect.on('data', function(line){
+			pool.release(connect);
+			console.log(line);
+			//var lines = line.split("\n");
+			encoding = 'utf8';
+			var decoded = line.toString(encoding);
+			var lines = decoded.split("\n");
+			if (decoded.charAt(decoded.length - 1) == "\n") {
+			    // get rid of last "" after last "\n"
+			    lines.pop(1);
+			}
+			if (lines.length > 0) {
+			    lines.forEach(function(one_line, index) {
+				console.log(one_line);
+				line += one_line;
+				var emit = true;
+				if (index == lines.length - 1) {
+				    if (decoded.charAt(decoded.length - 1) != "\n") {
+					emit = false;
+				    }
+				}
+				if (emit) {
+				    line = '';
+				}
+			    });
+			    console.log(line);
+			}
+		    });
+		    try{
 			console.log('send');
-		connect.write("aaaa\n");
-		}catch(e){
+			connect.write("aaaa\n");
+		    }catch(e){
 			console.log(e.message);
-		}
-	    }, true);
-		});
-	i++;
-		}
-	clearInterval(timer);
+		    }
+		}, true);
+	    });
+	    i++;
 	}
-		setInterval(timer, 1000);
+	clearInterval(timer);
+    }
+    setInterval(timer, 1000);
 }
 
 //pool.init(main);
