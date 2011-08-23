@@ -40,6 +40,7 @@ function logica(){
 	    process.nextTick(function(){
 		//console.log('running');
 		pool.get_connection(function(connect){
+		    /*
 		    //console.log("logic a get connection:", connect.connection_index);
 		    connect.on('data', function(line){
 			pool.release(connect);
@@ -69,6 +70,12 @@ function logica(){
 			    console.log(line);
 			}
 		    });
+		    */
+		    carrier.carry(connect, function(line){
+			pool.release(this.reader);
+			console.log('line:' + line);
+		    });
+
 		    try{
 			console.log('send');
 			connect.write("aaaa\n");
