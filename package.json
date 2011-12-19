@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git://github.com/alvayang/node_netpool.git"
   },
-  "main": "./libs/pool.js",
+  "main": "pool.js",
   "engines": {
     "node": ">= 0.4.6"
   },
